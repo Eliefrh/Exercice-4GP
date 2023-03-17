@@ -21,9 +21,7 @@ public class CameraTopDown : MonoBehaviour {
         PlacerCamera();
     }
 
-    /**
-     * Méthode qui place la caméra en fonction de la position du joueur
-     */
+  
     private void PlacerCamera()
     {
         float x = joueur.transform.position.x;
