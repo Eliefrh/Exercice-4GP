@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class MouvementSquelette : MonoBehaviour
     private NavMeshAgent _agent;
     private int _indexPatrouille;
     private Animator _animator;
+    private EtatSquelette _etat;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,20 +19,33 @@ public class MouvementSquelette : MonoBehaviour
         _indexPatrouille = 0;
         _agent.destination = _pointsPatrouille[_indexPatrouille].position;
         _animator = GetComponent<Animator>();
+
+        _etat = new EtatPatrouille(gameObject, _pointsPatrouille);
+        _etat.Enter();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!_agent.pathPending)
-        {
-            if (_agent.remainingDistance <= 0.1f)
-            {
-                _agent.destination = _pointsPatrouille[_indexPatrouille].position;
-                _indexPatrouille = (_indexPatrouille + 1) % _pointsPatrouille.Length;
-                _animator.SetBool("Walk",true);
-            }
-        }
 
+        _etat.Handle(Time.deltaTime);
+    //    if (!_agent.pathPending)
+    //    {
+    //        if (_agent.remainingDistance <= 0.1f)
+    //        {
+    //            _agent.destination = _pointsPatrouille[_indexPatrouille].position;
+    //            _indexPatrouille = (_indexPatrouille + 1) % _pointsPatrouille.Length;
+    //            _animator.SetBool("Walk",true);
+    //        }
+    //    }
+
+
+    }
+    public void ChangerEtat(EtatSquelette nouvelEtat)
+    {
+        _etat.leave();
+        _etat = nouvelEtat;
+        _etat.Enter();
     }
 }
