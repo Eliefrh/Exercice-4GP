@@ -15,7 +15,7 @@ namespace Assets.Scripts
         private int _indexPatrouille = 0;
 
 
-        public EtatPatrouille(GameObject sujet, Transform[] pointPatrouille) : base(sujet)
+        public EtatPatrouille(GameObject sujet, GameObject joueur, Transform[] pointPatrouille) : base(sujet, joueur)
         {
             _pointsPatrouille = pointPatrouille;
             _indexPatrouille = 0;

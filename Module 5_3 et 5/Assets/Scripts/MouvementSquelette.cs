@@ -11,6 +11,7 @@ public class MouvementSquelette : MonoBehaviour
     private int _indexPatrouille;
     private Animator _animator;
     private EtatSquelette _etat;
+    private GameObject joueur;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,7 @@ public class MouvementSquelette : MonoBehaviour
         _agent.destination = _pointsPatrouille[_indexPatrouille].position;
         _animator = GetComponent<Animator>();
 
-        _etat = new EtatPatrouille(gameObject, _pointsPatrouille);
+        _etat = new EtatPatrouille(gameObject,_joueur, _pointsPatrouille);
         _etat.Enter();
 
     }
@@ -48,4 +49,11 @@ public class MouvementSquelette : MonoBehaviour
         _etat = nouvelEtat;
         _etat.Enter();
     }
+
+    //protected bool JoueurVisible()
+    //{
+        
+    //}
+
+    
 }
